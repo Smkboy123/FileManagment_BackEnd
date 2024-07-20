@@ -26,8 +26,6 @@ public class TicketServiceImp implements TicketService {
     public Ticket creerTicket(Long idUser,Long idService){
         Ticket ticket = new Ticket();
         ticket.setStatus(StatutTicket.EN_COURS);
-        ticket.setNumeroTicket("T-" + System.currentTimeMillis());
-
         Utilisateur utilisateur = utilisateurService.afficherCompte(idUser);
         ServiceModel serviceModel = serviceMetier.getService(idService);
         ticket.setUtilisateur(utilisateur);
@@ -36,6 +34,17 @@ public class TicketServiceImp implements TicketService {
         FileAttente file = fileAttenteRepository.findById(1L)
                 .orElseThrow(() -> new RuntimeException("File not found"));
         ticket.setFileAttente(file);
+
+        return ticketRepository.save(ticket);
+    }
+
+    @Override
+    public Ticket creerTicketSimple(String nom, String prenom, String telephone, Long idService) {
+        Ticket ticket = new Ticket();
+        ServiceModel serviceModel = serviceMetier.getService(idService);
+        ticket.setNom(nom);
+        ticket.setPrenom(prenom);
+        ticket.setTelephonne(telephone);
 
         return ticketRepository.save(ticket);
     }

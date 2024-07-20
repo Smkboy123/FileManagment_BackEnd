@@ -5,12 +5,6 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-<<<<<<< HEAD
-import org.springframework.format.annotation.DateTimeFormat;
-=======
->>>>>>> cf6b2c9e98c2aa77a4d3d76cbee550e733cb3aea
-
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
