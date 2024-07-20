@@ -26,9 +26,13 @@ public class Ticket {
     @Temporal(TemporalType.TIMESTAMP)
     private Date heurePrise=new Date(System.currentTimeMillis());
     private String telephonne;
+<<<<<<< HEAD
     private String nom;
     private String prenom;
     private String telephone;
+=======
+
+>>>>>>> cf6b2c9e98c2aa77a4d3d76cbee550e733cb3aea
     //Un Utilisateur peut prendre des tickets mais un ticket appartient à un Utilisateur
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne(cascade = CascadeType.ALL)

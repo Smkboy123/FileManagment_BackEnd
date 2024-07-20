@@ -1,7 +1,10 @@
 package com.projet.FileManagement.Controller;
 
 import com.projet.FileManagement.Services.TicketServiceImp;
+<<<<<<< HEAD
 import com.projet.FileManagement.models.Role;
+=======
+>>>>>>> cf6b2c9e98c2aa77a4d3d76cbee550e733cb3aea
 import com.projet.FileManagement.models.Ticket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +15,11 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/ticket")
+<<<<<<< HEAD
 @CrossOrigin(origins = "http://localhost:4200")
+=======
+
+>>>>>>> cf6b2c9e98c2aa77a4d3d76cbee550e733cb3aea
 public class TicketController {
     @Autowired
     private TicketServiceImp ticketServiceImp;
@@ -40,9 +47,13 @@ public class TicketController {
     public ResponseEntity<Integer> getPosition(@PathVariable Long id){
         return ResponseEntity.ok(ticketServiceImp.getPosition(id));
       }
+<<<<<<< HEAD
     @GetMapping("/{idTicket}")
     public ResponseEntity<Ticket> afficherRole(@PathVariable Long idTicket) {
         Ticket ticket = ticketServiceImp.getTicket(idTicket);
         return ResponseEntity.ok(ticket);
     }
+=======
+
+>>>>>>> cf6b2c9e98c2aa77a4d3d76cbee550e733cb3aea
 }

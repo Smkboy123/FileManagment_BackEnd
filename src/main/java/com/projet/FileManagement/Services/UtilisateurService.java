@@ -13,5 +13,8 @@ public interface UtilisateurService {
     List<Utilisateur> getAllUtilisateurs();
     void ajouterTicket(Long IdFile, Long ticketId);
     Optional<Utilisateur> findByUsername(String username);
+<<<<<<< HEAD
     Utilisateur login (String username, String password);
+=======
+>>>>>>> cf6b2c9e98c2aa77a4d3d76cbee550e733cb3aea
 }

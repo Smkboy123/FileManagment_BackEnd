@@ -19,6 +19,7 @@ public class UserServiceImpl implements UtilisateurService {
     }
 
     @Override
+<<<<<<< HEAD
     public Utilisateur login(String username, String password) {
         Utilisateur utilisateur = utilisateurRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
@@ -31,6 +32,8 @@ public class UserServiceImpl implements UtilisateurService {
     }
 
     @Override
+=======
+>>>>>>> cf6b2c9e98c2aa77a4d3d76cbee550e733cb3aea
     public Utilisateur modifierCompte(Long userId, Utilisateur newUser) {
         Optional<Utilisateur> foundUser = utilisateurRepository.findById(userId);
         if (foundUser.isPresent()) {
@@ -71,6 +74,9 @@ public class UserServiceImpl implements UtilisateurService {
             return  utilisateurRepository.findByUsername(username);
         }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> cf6b2c9e98c2aa77a4d3d76cbee550e733cb3aea
     }

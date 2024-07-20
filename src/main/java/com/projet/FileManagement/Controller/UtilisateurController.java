@@ -4,7 +4,10 @@ package com.projet.FileManagement.Controller;
 import com.projet.FileManagement.Services.UtilisateurService;
 import com.projet.FileManagement.models.Utilisateur;
 import org.springframework.beans.factory.annotation.Autowired;
+<<<<<<< HEAD
 import org.springframework.http.HttpStatus;
+=======
+>>>>>>> cf6b2c9e98c2aa77a4d3d76cbee550e733cb3aea
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +16,10 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
+<<<<<<< HEAD
 @CrossOrigin(origins = "http://localhost:4200")
+=======
+>>>>>>> cf6b2c9e98c2aa77a4d3d76cbee550e733cb3aea
 public class UtilisateurController {
     @Autowired
     private UtilisateurService utilisateurService;
@@ -23,6 +29,7 @@ public class UtilisateurController {
         Utilisateur newCompte=utilisateurService.creerCompte(utilisateur);
         return ResponseEntity.ok(newCompte);
     }
+<<<<<<< HEAD
     @PostMapping("/login")
     public ResponseEntity<Utilisateur> login(@RequestParam String username, @RequestParam String password) {
         try {
@@ -32,6 +39,8 @@ public class UtilisateurController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
     }
+=======
+>>>>>>> cf6b2c9e98c2aa77a4d3d76cbee550e733cb3aea
 
     @PutMapping("/modifier/{id}")
     public ResponseEntity<Utilisateur> updateCompte(@PathVariable Long id,@RequestBody Utilisateur newCompte){
