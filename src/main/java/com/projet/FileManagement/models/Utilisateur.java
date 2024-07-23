@@ -21,7 +21,9 @@ public class Utilisateur {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idUtilisateur;
     private String username;
+    private String prenom;
     private String password;
+    private String email;
     private String telephone;
     //Un Utilisateur peut avoir plusieurs rôles et un rôle peut etre attribuer à plsrs users
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)

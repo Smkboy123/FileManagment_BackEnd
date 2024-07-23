@@ -16,17 +16,22 @@ public class TicketController {
     private TicketServiceImp ticketServiceImp;
 
     @PostMapping("/creer")
-    public ResponseEntity<Ticket> createTicket(@RequestParam Long idUser, @RequestParam Long idService){
+    public ResponseEntity<Ticket> createTicket(@RequestParam Long idUser,
+                                               @RequestParam Long idService){
         Ticket ticket=ticketServiceImp.creerTicket(idUser,idService);
         return ResponseEntity.ok(ticket);
     }
     @PostMapping("/creerSimple")
-    public ResponseEntity<Ticket> creerUnTicket_Sans_seConnecter(@RequestParam String nom,@RequestParam String prenom,@RequestParam String telephone, @RequestParam Long idService){
-        Ticket ticket=ticketServiceImp.creerTicketSimple(nom,prenom,telephone,idService);
+    public ResponseEntity<Ticket> creerUnTicket_Sans_seConnecter(@RequestParam String nom,
+                                                                 @RequestParam String telephone,
+                                                                 @RequestParam Long idService){
+        Ticket ticket=ticketServiceImp.creerTicketSimple(nom,telephone,idService);
         return ResponseEntity.ok(ticket);
     }
     @PutMapping("/modifier")
-    public ResponseEntity<Ticket> modifierTicket(@RequestParam Long id,@RequestParam Long idSer ,@RequestBody Ticket ticket){
+    public ResponseEntity<Ticket> modifierTicket(@RequestParam Long id,
+                                                 @RequestParam Long idSer ,
+                                                 @RequestBody Ticket ticket){
         Ticket foundTicket=ticketServiceImp.modifierInfosTicket(id,ticket,idSer);
         return ResponseEntity.ok(foundTicket);
     }

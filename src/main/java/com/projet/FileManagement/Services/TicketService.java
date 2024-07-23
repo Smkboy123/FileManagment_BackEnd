@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface TicketService {
     Ticket creerTicket(Long idUser,Long idService);
-    Ticket creerTicketSimple(String nom,String prenom, String telephone, Long idService);
+    Ticket creerTicketSimple(String nom,String telephone, Long idService);
     void annulerTicket(Long idTicket);
     int getPosition(Long idTicket);
     Ticket getTicket(Long idTicket);

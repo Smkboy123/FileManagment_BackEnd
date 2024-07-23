@@ -39,13 +39,12 @@ public class TicketServiceImp implements TicketService {
     }
 
     @Override
-    public Ticket creerTicketSimple(String nom, String prenom, String telephone, Long idService) {
+    public Ticket creerTicketSimple(String nom, String telephone, Long idService) {
         Ticket ticket = new Ticket();
         ServiceModel serviceModel = serviceMetier.getService(idService);
         ticket.setNom(nom);
-        ticket.setPrenom(prenom);
         ticket.setTelephonne(telephone);
-
+        ticket.setServiceModel(serviceModel);
         return ticketRepository.save(ticket);
     }
 
