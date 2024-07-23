@@ -1,5 +1,6 @@
 package com.projet.FileManagement.Controller;
 
+import com.projet.FileManagement.Exception.ApiConstants;
 import com.projet.FileManagement.Services.FileAttenteService;
 import com.projet.FileManagement.models.FileAttente;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/file")
-<<<<<<< HEAD
+@RequestMapping(ApiConstants.API_VERSION_ONE + "file")
 @CrossOrigin(origins = "http://localhost:4200")
-=======
-
->>>>>>> cf6b2c9e98c2aa77a4d3d76cbee550e733cb3aea
 public class FileAttenteController {
     @Autowired
     private FileAttenteService fileAttenteService;

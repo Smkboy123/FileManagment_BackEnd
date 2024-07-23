@@ -26,10 +26,7 @@ public class FileAttenteServiceImp implements FileAttenteService {
         if (file.isPresent()){
             FileAttente fileAttente=file.get();
             fileAttente.setNomFile(fileDetails.getNomFile());
-<<<<<<< HEAD
-=======
-            fileAttente.setDateCreation(fileDetails.getDateCreation());
->>>>>>> cf6b2c9e98c2aa77a4d3d76cbee550e733cb3aea
+        fileAttente.setDateCreation(fileDetails.getDateCreation());
             return fileAttenteRepository.save(fileAttente);
         }else {
             return  null;

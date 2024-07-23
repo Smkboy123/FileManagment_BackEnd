@@ -1,6 +1,7 @@
 package com.projet.FileManagement.Controller;
 
 
+import com.projet.FileManagement.Exception.ApiConstants;
 import com.projet.FileManagement.Services.RoleService;
 import com.projet.FileManagement.Services.RoleServiceImp;
 import com.projet.FileManagement.models.Role;
@@ -12,11 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/role")
-<<<<<<< HEAD
+@RequestMapping(ApiConstants.API_VERSION_ONE + "role")
 @CrossOrigin(origins = "http://localhost:4200")
-=======
->>>>>>> cf6b2c9e98c2aa77a4d3d76cbee550e733cb3aea
 public class RoleController {
 
     @Autowired
