@@ -1,6 +1,7 @@
 package com.projet.FileManagement.Controller;
 
 
+import com.projet.FileManagement.Exception.ApiConstants;
 import com.projet.FileManagement.Services.UtilisateurService;
 import com.projet.FileManagement.models.Utilisateur;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping(ApiConstants.API_VERSION_ONE + "users")
 @CrossOrigin(origins = "http://localhost:4200")
 public class UtilisateurController {
     @Autowired
@@ -23,10 +24,6 @@ public class UtilisateurController {
         Utilisateur newCompte=utilisateurService.creerCompte(utilisateur);
         return ResponseEntity.ok(newCompte);
     }
-
-
-
-
     @PostMapping("/login")
     public ResponseEntity<Utilisateur> login(@RequestParam String username, @RequestParam String password) {
         try {
@@ -36,8 +33,6 @@ public class UtilisateurController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
     }
-
-
     @PutMapping("/modifier/{id}")
     public ResponseEntity<Utilisateur> updateCompte(@PathVariable Long id,@RequestBody Utilisateur newCompte){
         Utilisateur updateCompte=utilisateurService.modifierCompte(id,newCompte);
