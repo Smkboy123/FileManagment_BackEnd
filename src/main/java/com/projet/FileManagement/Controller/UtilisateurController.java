@@ -2,15 +2,21 @@ package com.projet.FileManagement.Controller;
 
 
 import com.projet.FileManagement.Exception.ApiConstants;
+import com.projet.FileManagement.Services.RoleService;
 import com.projet.FileManagement.Services.UtilisateurService;
+import com.projet.FileManagement.models.Role;
+import com.projet.FileManagement.models.RoleName;
 import com.projet.FileManagement.models.Utilisateur;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 @RequestMapping(ApiConstants.API_VERSION_ONE + "users")
@@ -18,9 +24,38 @@ import java.util.Optional;
 public class UtilisateurController {
     @Autowired
     private UtilisateurService utilisateurService;
+    @Autowired
+    private  PasswordEncoder passwordEncoder;
+    @Autowired
+    private RoleService roleService;
+
 
     @PostMapping("/creer")
     public ResponseEntity<Utilisateur> creerCompte(@RequestBody Utilisateur utilisateur){
+
+        Set<Role> strRoles = utilisateur.getRoles();
+        Set<Role> roles = new HashSet<>();
+        if(strRoles != null){
+
+            strRoles.forEach(role -> {
+                switch (role.getRoleName().name()) {
+                    case "admin":
+                        Role adminRole = roleService.getRoleByName(RoleName.ROLE_ADMIN)
+                                .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
+                        roles.add(adminRole);
+
+                        break;
+
+                    default:
+                        Role userRole = roleService.getRoleByName(RoleName.ROLE_USER)
+                                .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
+                        roles.add(userRole);
+                }
+            });
+        }
+
+        utilisateur.setRoles(roles);
+        utilisateur.setPassword(passwordEncoder.encode(utilisateur.getPassword()));
         Utilisateur newCompte=utilisateurService.creerCompte(utilisateur);
         return ResponseEntity.ok(newCompte);
     }

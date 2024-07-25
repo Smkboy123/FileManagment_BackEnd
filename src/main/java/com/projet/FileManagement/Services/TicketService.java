@@ -12,5 +12,5 @@ public interface TicketService {
     Ticket getTicket(Long idTicket);
     List<Ticket> getTickets();
     Ticket changerStatut(Long idTicket);
-    Ticket modifierInfosTicket(Long idTicket, Ticket ticketDetails,Long idService);
+    Ticket modifierInfosTicket(Long idTicket,Long idService, Ticket ticketDetails);
 }

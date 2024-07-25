@@ -29,11 +29,11 @@ public class TicketController {
         Ticket ticket=ticketServiceImp.creerTicketSimple(nom,telephone,idService);
         return ResponseEntity.ok(ticket);
     }
-    @PutMapping("/modifier")
-    public ResponseEntity<Ticket> modifierTicket(@RequestParam Long id,
-                                                 @RequestParam Long idSer ,
+    @PutMapping("/modifier/{id}/{idSer}")
+    public ResponseEntity<Ticket> modifierTicket(@PathVariable("id") Long id,
+                                                 @PathVariable("idSer") Long idSer ,
                                                  @RequestBody Ticket ticket){
-        Ticket foundTicket=ticketServiceImp.modifierInfosTicket(id,ticket,idSer);
+        Ticket foundTicket=ticketServiceImp.modifierInfosTicket(id,idSer,ticket);
         return ResponseEntity.ok(foundTicket);
     }
     @DeleteMapping("/annuler/{idTicket}")

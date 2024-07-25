@@ -1,9 +1,12 @@
 package com.projet.FileManagement.Services;
 
+import com.projet.FileManagement.Exception.ResponseMessage;
+import com.projet.FileManagement.Exception.TicketNotFoundException;
 import com.projet.FileManagement.Repository.FileAttenteRepository;
 import com.projet.FileManagement.Repository.TicketRepository;
 import com.projet.FileManagement.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -71,8 +74,12 @@ public class TicketServiceImp implements TicketService {
 }
     @Override
     public Ticket getTicket(Long idTicket) {
-        return ticketRepository.findById(idTicket).orElse(null);
+        return ticketRepository.findById(idTicket)
+                .orElseThrow(() -> new TicketNotFoundException(
+                        new ResponseMessage(LocalDateTime.now(), HttpStatus.NO_CONTENT.value(), "Ce ticket n'est plus valable !", idTicket)
+                ));
     }
+
 
     @Override
     public List<Ticket> getTickets() {
@@ -97,13 +104,14 @@ public class TicketServiceImp implements TicketService {
     }
 
     @Override
-    public Ticket modifierInfosTicket(Long idTicket,Ticket ticketDetails, Long idService) {
+    public Ticket modifierInfosTicket(Long idTicket, Long idService,Ticket ticketDetails) {
         Optional<Ticket> foundTicket=ticketRepository.findById(idTicket);
         if (foundTicket.isPresent()){
             Ticket ticket=foundTicket.get();
             ServiceModel serviceModel=serviceMetier.getService(idService);
             ticket.setServiceModel(serviceModel);
             ticket.setTelephonne(ticketDetails.getTelephonne());
+            ticket.setNom(ticketDetails.getNom());
             return ticketRepository.save(ticket);
         }
 

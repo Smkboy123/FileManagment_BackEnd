@@ -29,7 +29,7 @@ public class Ticket {
     private String telephone;
     //Un Utilisateur peut prendre des tickets mais un ticket appartient à un Utilisateur
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "utilisateur_id")
     private Utilisateur utilisateur;
     //un ticket ne peu qu'appartenir qu'à une seule File Attente
@@ -43,7 +43,7 @@ public class Ticket {
     private List<Notification> notifications;
     //Ticket serviceModel
    // @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "id_service")
     private ServiceModel serviceModel;
 }
