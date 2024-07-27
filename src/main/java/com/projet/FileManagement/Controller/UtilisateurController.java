@@ -4,6 +4,7 @@ package com.projet.FileManagement.Controller;
 import com.projet.FileManagement.Exception.ApiConstants;
 import com.projet.FileManagement.Services.RoleService;
 import com.projet.FileManagement.Services.UtilisateurService;
+import com.projet.FileManagement.models.RegisterForm;
 import com.projet.FileManagement.models.Role;
 import com.projet.FileManagement.models.RoleName;
 import com.projet.FileManagement.models.Utilisateur;
@@ -31,18 +32,23 @@ public class UtilisateurController {
 
 
     @PostMapping("/creer")
-    public ResponseEntity<Utilisateur> creerCompte(@RequestBody Utilisateur utilisateur){
+    public ResponseEntity<Utilisateur> creerCompte(@RequestBody RegisterForm registerForm){
 
-        Set<Role> strRoles = utilisateur.getRoles();
+        System.out.println("UTILISATEUR = "+registerForm.getRole());
+
+        Set<String> strRoles = registerForm.getRole();
         Set<Role> roles = new HashSet<>();
         if(strRoles != null){
-
             strRoles.forEach(role -> {
-                switch (role.getRoleName().name()) {
+                switch (role) {
                     case "admin":
                         Role adminRole = roleService.getRoleByName(RoleName.ROLE_ADMIN)
                                 .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
                         roles.add(adminRole);
+                    case "user":
+                        Role userRoles = roleService.getRoleByName(RoleName.ROLE_USER)
+                                .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
+                        roles.add(userRoles);
 
                         break;
 
@@ -53,9 +59,16 @@ public class UtilisateurController {
                 }
             });
         }
-
+        else {
+            Role userRole = roleService.getRoleByName(RoleName.ROLE_USER)
+                    .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
+            roles.add(userRole);
+        }
+        Utilisateur utilisateur = new Utilisateur();
+        utilisateur.setUsername(registerForm.getUsername());
+        utilisateur.setTelephone(registerForm.getTelephone());
         utilisateur.setRoles(roles);
-        utilisateur.setPassword(passwordEncoder.encode(utilisateur.getPassword()));
+        utilisateur.setPassword(passwordEncoder.encode(registerForm.getPassword()));
         Utilisateur newCompte=utilisateurService.creerCompte(utilisateur);
         return ResponseEntity.ok(newCompte);
     }
