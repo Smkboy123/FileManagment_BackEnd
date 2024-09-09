@@ -3,6 +3,7 @@ package com.projet.FileManagement.Services;
 import com.projet.FileManagement.Repository.RoleRepository;
 import com.projet.FileManagement.Repository.UtilisateurRepository;
 import com.projet.FileManagement.models.Role;
+import com.projet.FileManagement.models.RoleName;
 import com.projet.FileManagement.models.Utilisateur;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,7 @@ public class RoleServiceImp implements RoleService {
         Optional<Role> foundRole= roleRepository.findById(idRole);
         if(foundRole!=null){
             Role roleTrouve=foundRole.get();
-            roleTrouve.setNomRole(roleDetails.getNomRole());
+           // roleTrouve.setNomRole(roleDetails.getNomRole());
             return roleRepository.save(roleTrouve);
         }
         return null;
@@ -65,7 +66,8 @@ public class RoleServiceImp implements RoleService {
     public List<Utilisateur> afficherUtilisateursParRole(Long idRole) {
         Optional<Role> rolefound=roleRepository.findById(idRole);
         if (rolefound.isPresent()){
-            return rolefound.get().getUtilisateurs();
+            return null;
+           // return rolefound.get().getUtilisateurs();
         }else
          return List.of();
     }
@@ -73,5 +75,11 @@ public class RoleServiceImp implements RoleService {
     @Override
     public void deleteRole(Long idRole) {
         roleRepository.deleteById(idRole);
+    }
+
+
+    @Override
+    public Optional<Role> getRoleByName(RoleName roleName) {
+        return roleRepository.findByRoleName(roleName);
     }
 }

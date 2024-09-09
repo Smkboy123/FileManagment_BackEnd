@@ -1,5 +1,6 @@
 package com.projet.FileManagement.Controller;
 
+import com.projet.FileManagement.Exception.ApiConstants;
 import com.projet.FileManagement.Services.TicketServiceImp;
 import com.projet.FileManagement.models.Ticket;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/ticket")
+@RequestMapping(ApiConstants.API_VERSION_ONE + "ticket")
 @CrossOrigin(origins = "http://localhost:4200")
 public class TicketController {
     @Autowired
@@ -28,11 +29,11 @@ public class TicketController {
         Ticket ticket=ticketServiceImp.creerTicketSimple(nom,telephone,idService);
         return ResponseEntity.ok(ticket);
     }
-    @PutMapping("/modifier")
-    public ResponseEntity<Ticket> modifierTicket(@RequestParam Long id,
-                                                 @RequestParam Long idSer ,
+    @PutMapping("/modifier/{id}/{idSer}")
+    public ResponseEntity<Ticket> modifierTicket(@PathVariable("id") Long id,
+                                                 @PathVariable("idSer") Long idSer ,
                                                  @RequestBody Ticket ticket){
-        Ticket foundTicket=ticketServiceImp.modifierInfosTicket(id,ticket,idSer);
+        Ticket foundTicket=ticketServiceImp.modifierInfosTicket(id,idSer,ticket);
         return ResponseEntity.ok(foundTicket);
     }
     @DeleteMapping("/annuler/{idTicket}")

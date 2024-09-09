@@ -1,9 +1,13 @@
 package com.projet.FileManagement.Services;
 
 import com.projet.FileManagement.Repository.UtilisateurRepository;
+import com.projet.FileManagement.Security.services.UserPrinciple;
 import com.projet.FileManagement.models.Utilisateur;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -70,5 +74,14 @@ public class UserServiceImpl implements UtilisateurService {
     public Optional<Utilisateur> findByUsername(String username) {
             return  utilisateurRepository.findByUsername(username);
         }
+
+    @Override
+    @Transactional
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Utilisateur user = utilisateurRepository.findByUsername(username).orElseThrow(
+                () -> new UsernameNotFoundException("User Not Found with -> username : " + username));
+
+        return UserPrinciple.build(user);
+    }
 
     }

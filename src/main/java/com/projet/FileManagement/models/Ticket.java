@@ -1,10 +1,8 @@
 package com.projet.FileManagement.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -31,7 +29,7 @@ public class Ticket {
     private String telephone;
     //Un Utilisateur peut prendre des tickets mais un ticket appartient à un Utilisateur
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "utilisateur_id")
     private Utilisateur utilisateur;
     //un ticket ne peu qu'appartenir qu'à une seule File Attente
@@ -45,7 +43,7 @@ public class Ticket {
     private List<Notification> notifications;
     //Ticket serviceModel
    // @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "id_service")
     private ServiceModel serviceModel;
 }

@@ -1,5 +1,6 @@
 package com.projet.FileManagement.Controller;
 
+import com.projet.FileManagement.Exception.ApiConstants;
 import com.projet.FileManagement.Services.NotificationService;
 import com.projet.FileManagement.models.Notification;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/notification")
-
+@RequestMapping(ApiConstants.API_VERSION_ONE + "notification")
 @CrossOrigin(origins = "http://localhost:4200")
-
 public class NotificationController {
 
     @Autowired
