@@ -31,6 +31,7 @@ public class FileAttenteController {
         }
     }
 
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<FileAttente> supprimerFile(@PathVariable Long id){
         fileAttenteService.supprimerFile(id);
